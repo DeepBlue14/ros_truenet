@@ -197,5 +197,5 @@ target_link_libraries(lag ${catkin_LIBRARIES})
 add_executable(chatterbot src/Chatterbot.cpp)
 target_link_libraries(chatterbot ${catkin_LIBRARIES})
 
-add_executable(scrambler src/Scrambler.cpp)
+add_executable(scrambler include/ros_truenet/Scrambler.hpp src/Scrambler_main.cpp)
 target_link_libraries(scrambler ${catkin_LIBRARIES})

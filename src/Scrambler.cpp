@@ -1,52 +1,69 @@
-#include "ros/ros.h"
-#include "std_msgs/String.h"
-#include "stdlib.h"
+#include "../include/ros_truenet/Scrambler.hpp"
 
-#include <iostream>
-using namespace std;
-
-std_msgs::String oldMsg;
-
-ros::Publisher chatter_pub;
-
-void callback(std_msgs::String msg);
-
-void send(std_msgs::String msg);
-
-void callback(std_msgs::String msg)
+namespace rtn
 {
-	int val = (random() % 5) + 1;
-	
-	if(val == 1)
+	template<typename x_msg>
+	Scrambler<x_msg>::Scrambler(const char* reroutedTopicName, unsigned int maxBufferLength, Scrambler::Type type)
 	{
-		cout << val << endl;
+		this->type = type;
+		buffer = new queue<x_msg>();
 	}
-	
-	
-
-	send(msg);
-}
 
 
-void send(std_msgs::String msg)
-{
-	chatter_pub.publish(msg);
-}
+	template<typename x_msg>
+	void Scrambler<x_msg>::callback(x_msg msg)
+	{
+		int val = (random() % 5) + 1;
+
+		if(val == 1)
+		{
+			msg = scramble(msg);
+		}
 
 
-int main(int argc, char** argv)
-{
-	ros::init(argc, argv, "listener");
+		pub->publish(msg);
+	}
 
-    ros::NodeHandle n;
 
-	srandom(1);
+	template<typename x_msg>
+	x_msg Scrambler<x_msg>::scramble(x_msg msg)
+	{
+		cout << "scramble message..." << endl;
 
-    ros::Subscriber sub = n.subscribe("chatter/in", 1000, callback);
+		switch(type)
+		{
+			case STD_MSGS_STRING:
+				;
+				break;
+			case STD_MSGS_INT:
+				;
+				break;
+			default:
+				;
 
-    chatter_pub=n.advertise<std_msgs::String>("chatter", 1000);
+		}
 
-    ros::spin();
-    
-    return 0;
+		return msg;
+	}
+
+
+	template<typename x_msg>
+	Publisher* Scrambler<x_msg>::getPublisher() const
+	{
+		return pub;
+	}
+
+
+	template<typename x_msg>
+	Scrambler<x_msg>::~Scrambler()
+	{
+		while(buffer->size() > 0)
+		{
+			buffer->pop();
+		}
+		delete buffer;
+	}
+
+
+
 }
