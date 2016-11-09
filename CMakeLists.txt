@@ -196,3 +196,6 @@ target_link_libraries(lag ${catkin_LIBRARIES})
 
 add_executable(chatterbot src/Chatterbot.cpp)
 target_link_libraries(chatterbot ${catkin_LIBRARIES})
+
+add_executable(scrambler src/Scrambler.cpp)
+target_link_libraries(scrambler ${catkin_LIBRARIES})

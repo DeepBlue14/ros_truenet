@@ -14,7 +14,33 @@ namespace tnt
 	}
 
 
-    //callback here
+    template<typename x_msg>
+	void Lag<x_msg>::callback(x_msg msg)
+	{
+	    currTime = Time::now();
+	    
+	    //cout << "prevTime=" << prevTime.nsec << " | currTime=" << currTime.nsec << endl;
+	    //cout << (currTime.nsec / 1000000000.0) << endl; //nsec is nanoseconds
+	    //cout << toSec(currTime) << " >=? " << toSec(prevTime) << endl;
+	    
+	    //if(currTime.sec >= prevTime.sec + 5)
+	    if(toSec(currTime) >= toSec(prevTime) + 0.5)
+	    {
+	        cout << "message: " << msg << endl;
+	        prevTime = currTime;
+	        pub->publish(msg);
+	    }
+	    
+	    
+	    if(buffer->size() > maxLength)
+	    {
+	        //buffer->pop_front();
+	        buffer->pop();
+	    }
+		
+		//buffer->push_back(msg);
+		buffer->push(msg);
+	}
 	
 	
 	template<typename x_msg>
