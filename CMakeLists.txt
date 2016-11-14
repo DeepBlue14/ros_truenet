@@ -199,3 +199,6 @@ target_link_libraries(chatterbot ${catkin_LIBRARIES})
 
 add_executable(scrambler include/ros_truenet/Scrambler.hpp src/Scrambler_main.cpp)
 target_link_libraries(scrambler ${catkin_LIBRARIES})
+
+add_executable(downtime include/ros_truenet/Downtime.hpp src/Downtime_main.cpp)
+target_link_libraries(downtime ${catkin_LIBRARIES})
