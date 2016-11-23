@@ -7,10 +7,17 @@ namespace tnt
 	template<typename x_msg>
 	Lag<x_msg>::Lag(const char* reroutedTopicName, unsigned int maxBufferLength) : NANO(1000000000.0)
 	{
+		int argc = 0;
+		char** argv;
+		init(argc, argv, "lag");
+		//NodeHandle nh;
+		ros::start();
+	
 		buffer = new queue<x_msg>();
 		prevTime = Time::now();
 		currTime = Time::now();
 		pub = new Publisher();
+		lag = 0.5;
 	}
 
 
@@ -24,7 +31,7 @@ namespace tnt
 	    //cout << toSec(currTime) << " >=? " << toSec(prevTime) << endl;
 	    
 	    //if(currTime.sec >= prevTime.sec + 5)
-	    if(toSec(currTime) >= toSec(prevTime) + 0.5)
+	    if(toSec(currTime) >= toSec(prevTime) + lag)
 	    {
 	        cout << "message: " << msg << endl;
 	        prevTime = currTime;
@@ -40,6 +47,13 @@ namespace tnt
 		
 		//buffer->push_back(msg);
 		buffer->push(msg);
+	}
+	
+	
+	template<typename x_msg>
+	float Lag<x_msg>::setLag(float lag)
+	{
+		this->lag=lag;
 	}
 	
 	

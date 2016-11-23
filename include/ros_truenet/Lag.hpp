@@ -9,6 +9,9 @@
 
 #include <std_msgs/String.h>
 
+#include <dynamic_reconfigure/server.h>
+#include <ros_truenet/Truenet2Config.h>
+
 using std::cout;
 using std::cerr;
 using std::endl;
@@ -32,6 +35,7 @@ namespace tnt
 		    
 			Lag(const char* reroutedTopicName, unsigned int maxBufferLength);
 			void callback(x_msg msg);
+			float setLag(float lag);
 			Publisher* getPublisher() const;
 			const char* toString() const;
 			~Lag();
@@ -39,7 +43,7 @@ namespace tnt
 		private:
 		    int toNsec(Time time) const;
 		    double toSec(Time time) const;
-		
+			float lag;
 		    const float NANO;// = 1000000000.0;
 			queue<x_msg>* buffer;
 			Time prevTime;
