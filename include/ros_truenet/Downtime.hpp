@@ -1,5 +1,5 @@
-#ifndef LAG_HPP
-#define LAG_HPP
+#ifndef Downtime_HPP
+#define Downtime_HPP
 
 #include <iostream>
 #include <string>
@@ -8,9 +8,6 @@
 #include <ros/ros.h>
 
 #include <std_msgs/String.h>
-
-#include <dynamic_reconfigure/server.h>
-#include <ros_truenet/Truenet2Config.h>
 
 using std::cout;
 using std::cerr;
@@ -35,7 +32,6 @@ namespace tnt
 		    
 			Lag(const char* reroutedTopicName, unsigned int maxBufferLength);
 			void callback(x_msg msg);
-			float setLag(float lag);
 			Publisher* getPublisher() const;
 			const char* toString() const;
 			~Lag();
@@ -43,9 +39,10 @@ namespace tnt
 		private:
 		    int toNsec(Time time) const;
 		    double toSec(Time time) const;
-			float lag;
+		
 		    const float NANO;// = 1000000000.0;
 			queue<x_msg>* buffer;
+			bool isPublishing;
 			Time prevTime;
 			Time currTime;
 			Publisher* pub;
@@ -54,6 +51,6 @@ namespace tnt
 		
 	};
 }
-#include "../../src/Lag.tpp"
+#include "../../src/Downtime.tpp"
 
-#endif /* LAG_HPP */
+#endif /* Downtime_HPP */

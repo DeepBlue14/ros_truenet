@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <sstream>
 
 using std::cout;
 using std::cerr;

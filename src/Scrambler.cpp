@@ -30,10 +30,15 @@ namespace rtn
 	{
 		cout << "scramble message..." << endl;
 
+		std::stringstream ss;			
+			
 		switch(type)
 		{
 			case STD_MSGS_STRING:
-				;
+				// change the string data to something else.
+  					ss << "scramble message";
+    				msg.data = ss.str();
+    				
 				break;
 			case STD_MSGS_INT:
 				;
