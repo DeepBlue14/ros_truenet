@@ -18,6 +18,14 @@ void callback(ros_truenet::Truenet2Config &config, uint32_t level) {
             config.Activate?"True":"False", 
             config.Shape);
   lag.setLag(config.test);
+  if(config.Variance <= config.test)
+  {
+  lag.setVariance(config.Variance);
+  }
+  else
+  {
+  config.Variance = lag.getVariance();
+  }
 }
 
 int main(int argc, char** argv)

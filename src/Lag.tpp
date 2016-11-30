@@ -17,7 +17,10 @@ namespace tnt
 		prevTime = Time::now();
 		currTime = Time::now();
 		pub = new Publisher();
-		lag = 0.5;
+		lag = 5;
+		variance = 1;
+		x = 0;			
+		goingUp = true;	
 	}
 
 
@@ -26,12 +29,26 @@ namespace tnt
 	{
 	    currTime = Time::now();
 	    
+	    cout << variance*sin(x) + lag << endl;
+	    
+	    if(x < 2*M_PI && goingUp == true)
+	    {
+	    	x += M_PI/12.0;
+	    	cout << "test text" << endl;
+	    }
+	    else if(x >= 2*M_PI)
+	    {
+	    	//goingUp = false;
+	    	x = 0;
+	    }
+	    //FIXME : finish implementing this else if chain
+	    
 	    //cout << "prevTime=" << prevTime.nsec << " | currTime=" << currTime.nsec << endl;
 	    //cout << (currTime.nsec / 1000000000.0) << endl; //nsec is nanoseconds
 	    //cout << toSec(currTime) << " >=? " << toSec(prevTime) << endl;
 	    
 	    //if(currTime.sec >= prevTime.sec + 5)
-	    if(toSec(currTime) >= toSec(prevTime) + lag)
+	    if(toSec(currTime) >= toSec(prevTime) + lag + variance*sin(x))
 	    {
 	        cout << "message: " << msg << endl;
 	        prevTime = currTime;
@@ -56,6 +73,17 @@ namespace tnt
 		this->lag=lag;
 	}
 	
+	template<typename x_msg>
+	float Lag<x_msg>::setVariance(float variance)
+	{
+		this->variance=variance;
+	}
+	
+	template<typename x_msg>
+	float Lag<x_msg>::getVariance()
+	{
+		return variance;
+	}
 	
 	template<typename x_msg>
 	Publisher* Lag<x_msg>::getPublisher() const
