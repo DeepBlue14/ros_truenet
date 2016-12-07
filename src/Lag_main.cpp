@@ -14,18 +14,26 @@ Lag<std_msgs::String> lag("/chatter/out", 10);
 
 void callback(ros_truenet::Truenet2Config &config, uint32_t level) {
   ROS_INFO("Reconfigure Request: %f %d %s %d", 
-            config.test, config.Variance,
-            config.Activate?"True":"False", 
+            config.Lag, config.Variance,
+            config.Activate?"True":"False", 	//FIXME: config.Activate not yet implemented
             config.Shape);
-  lag.setLag(config.test);
-  if(config.Variance <= config.test)
+  if(config.Variance <= config.Lag)
   {
-  lag.setVariance(config.Variance);
+  	lag.setVariance(config.Variance);
   }
   else
   {
-  config.Variance = lag.getVariance();
+  	config.Variance = lag.getVariance();
   }
+  if(config.Lag >= config.Variance)
+  {
+  	lag.setLag(config.Lag);
+  }
+  else
+  {
+  	config.Lag = lag.getLag();
+  }
+  lag.setShape(config.Shape);
 }
 
 int main(int argc, char** argv)
