@@ -12,6 +12,8 @@
 #include <dynamic_reconfigure/server.h>
 #include <ros_truenet/Truenet2Config.h>
 
+#include <cmath>
+
 using std::cout;
 using std::cerr;
 using std::endl;
@@ -36,6 +38,15 @@ namespace tnt
 			Lag(const char* reroutedTopicName, unsigned int maxBufferLength);
 			void callback(x_msg msg);
 			float setLag(float lag);
+			float getLag();
+			float setVariance(float variance);
+			float getVariance();
+			float computeSineLag();
+			float computeExpLag();
+			float computeLinearLag();
+			float computeConstLag();
+			float setShape(float shape);
+			float getShape();
 			Publisher* getPublisher() const;
 			const char* toString() const;
 			~Lag();
@@ -44,6 +55,9 @@ namespace tnt
 		    int toNsec(Time time) const;
 		    double toSec(Time time) const;
 			float lag;
+			float x;
+			float variance;
+			float shape;
 		    const float NANO;// = 1000000000.0;
 			queue<x_msg>* buffer;
 			Time prevTime;
