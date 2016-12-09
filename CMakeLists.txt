@@ -201,21 +201,20 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+# Lag
 add_executable(lag include/ros_truenet/Lag.hpp src/Lag_main.cpp)
 target_link_libraries(lag ${catkin_LIBRARIES})
+add_dependencies(lag ${ros_truenet}_gencfg)
 
-add_executable(chatterbot src/Chatterbot.cpp)
-target_link_libraries(chatterbot ${catkin_LIBRARIES})
-
+# Message corruption
 add_executable(scrambler include/ros_truenet/Scrambler.hpp src/Scrambler_main.cpp)
 target_link_libraries(scrambler ${catkin_LIBRARIES})
 
+# Unstable network
 add_executable(downtime include/ros_truenet/Downtime.hpp src/Downtime_main.cpp)
 target_link_libraries(downtime ${catkin_LIBRARIES})
 
-add_executable(server src/server.cpp)
-target_link_libraries(server ${catkin_LIBRARIES})
 
-add_dependencies(lag ${ros_truenet}_gencfg)
-
-add_dependencies(server ${ros_truenet}_gencfg)
+# "chatterbot" for testing
+add_executable(chatterbot src/Chatterbot.cpp)
+target_link_libraries(chatterbot ${catkin_LIBRARIES})
