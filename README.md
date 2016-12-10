@@ -9,11 +9,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[University of Massachusetts Lowell][2].  
 *Email:* jkuczyns@cs.uml.edu
 
-*Author:* Drew Latwas,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Undergraduate Co-op,
+*Author:* Drew Latwas,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Undergraduate Co-op,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Robotics Laboratory][1],  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[University of Massachusetts Lowell][2].  
-*Email:* Drew_Latwas@student.uml.edu
+*Email:* Drew_Latwas@student.uml.edu  
 
 ###**Index**
 

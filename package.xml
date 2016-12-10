@@ -4,8 +4,10 @@
   <version>0.0.0</version>
   <description>The ros_truenet package</description>
   <maintainer email="jkuczyns@cs.uml.edu">James Kuczynski</maintainer>
+  <maintainer email="Drew_Latwas@student.uml.edu">Drew Latwas</maintainer>
   <license>TODO</license>
   <author email="jkuczyns@cs.uml.edu">James Kuczynski</author>
+  <author email="Drew_Latwas@student.uml.edu">Drew Latwas</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>cv_bridge</build_depend>

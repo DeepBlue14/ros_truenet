@@ -99,7 +99,6 @@ find_package(catkin REQUIRED COMPONENTS
 #add dynamic reconfigure api
 #find_package(catkin REQUIRED dynamic_reconfigure)
 generate_dynamic_reconfigure_options(
-  cfg/Truenet.cfg
   cfg/Truenet2.cfg
   #...
 )
